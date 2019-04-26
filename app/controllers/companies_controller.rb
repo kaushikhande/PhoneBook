@@ -11,6 +11,9 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json curl -i -H 'If-Modified-Since: Wed, 12 Nov 2014 15:44:46 GMT' http://localhost:3000/companies/1
   def show
     fresh_when last_modified: @company.updated_at
+    @company.employees.each do |employee|
+      fresh_when last_modified: employee.updated_at
+    end
   end
 
   # GET /companies/new
